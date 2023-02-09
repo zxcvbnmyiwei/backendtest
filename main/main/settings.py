@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
-import django_heroku
 import dj_database_url
 import os
 
@@ -152,15 +151,19 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #     }
 # }
 
+# DATABASES={
+#    'default':{
+#       'ENGINE':'django.db.backends.postgresql_psycopg2',
+#       'NAME':'FYPDB',
+#       'USER':'postgres',
+#       'PASSWORD':'123123',
+#       'HOST':'localhost',
+#       'PORT':'5432',
+#    }
+# }
+
 DATABASES={
-   'default':{
-      'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME':'FYPDB',
-      'USER':'postgres',
-      'PASSWORD':'123123',
-      'HOST':'localhost',
-      'PORT':'5432',
-   }
+   'default': dj_database_url.parse("postgres://testdb_iqqr_user:XQLcta7Zstk5egnBtGYBurNSqW2WUdMb@dpg-cfi670hgp3jh03hlq640-a.singapore-postgres.render.com/testdb_iqqr")
 }
 
 # Password validation
@@ -198,9 +201,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-django_heroku.settings(locals())
+MEDIA_URL = 'media/'
 
 CELERY_BROKER_URL = 'redis://localhost:6379'
 
